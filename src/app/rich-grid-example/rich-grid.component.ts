@@ -1,18 +1,12 @@
 import {Component, ViewEncapsulation} from "@angular/core";
-import {ColumnApi, GridApi} from "@ag-grid-enterprise/all-modules";
+import {ColumnApi, GridApi} from "ag-grid-community";
 
 import {ProficiencyFilter} from '../filters/proficiency.component.filter';
 import {SkillFilter} from '../filters/skill.component.filter';
 import RefData from '../data/refData';
 
-// for community features
-// import {Module, CommunityModules} from "@ag-grid-community/all-modules";
-
-// for enterprise features
-import {Module, AllModules } from "@ag-grid-enterprise/all-modules";
-
 // set your key here
-// import {LicenseManager} from "@ag-grid-enterprise/all-modules";
+// import {LicenseManager} from "ag-grid-enterprise";
 // LicenseManager.setLicenseKey(<your key>);
 
 import {HeaderGroupComponent} from "../header-group-component/header-group.component";
@@ -34,8 +28,6 @@ export class RichGridComponent {
     public defaultColDef: any;
     public frameworkComponents: any;
     public sideBar: false;
-
-    public modules: Module[] = AllModules;
 
     public api: GridApi;
     public columnApi: ColumnApi;
