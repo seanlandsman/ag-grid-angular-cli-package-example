@@ -1,7 +1,7 @@
-import {IFilterParams} from "@ag-grid-enterprise/all-modules";
+import {IFilterParams} from "ag-grid-community";
 
 import {Component} from "@angular/core";
-import {IFilterAngularComp} from "@ag-grid-community/angular";
+import {IFilterAngularComp} from "ag-grid-angular";
 
 @Component({
     template: `
