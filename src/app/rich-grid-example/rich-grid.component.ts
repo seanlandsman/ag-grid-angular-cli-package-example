@@ -88,7 +88,7 @@ export class RichGridComponent {
         this.columnDefs = [
             {
                 headerName: '#',
-                width: 30,
+                width: 40,
                 checkboxSelection: true,
                 filter: false,
                 sortable: false,
@@ -216,20 +216,22 @@ export class RichGridComponent {
     }
 
     public invokeSkillsFilterMethod() {
-        let skillsFilter = this.api.getFilterInstance('skills');
-        let componentInstance = skillsFilter.getFrameworkComponentInstance();
-        componentInstance.helloFromSkillsFilter();
+        this.api.getFilterInstance('skills', (instance) => {
+            let componentInstance = instance.getFrameworkComponentInstance();
+            componentInstance.helloFromSkillsFilter();
+        });
     }
 
     public dobFilter() {
-        let dateFilterComponent = this.api.getFilterInstance('dob');
-        dateFilterComponent.setModel({
-            type: 'equals',
-            dateFrom: '2000-01-01'
-        });
+        this.api.getFilterInstance('dob', (dateFilterComponent) => {
+            dateFilterComponent.setModel({
+                type: 'equals',
+                dateFrom: '2000-01-01'
+            });
 
-        this.api.onFilterChanged();
-    };
+            this.api.onFilterChanged();
+        });
+    }
 }
 
 function skillsCellRenderer(params) {
