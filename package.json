@@ -1,6 +1,6 @@
 {
   "name": "ag-grid-angular-cli-package-example",
-  "version": "23.0.2",
+  "version": "23.1.0",
   "description": "ag-Grid Angular Example Using Angular CLI",
   "license": "MIT",
   "repository": {
@@ -19,9 +19,9 @@
   },
   "private": true,
   "dependencies": {
-    "ag-grid-enterprise": "~23.0.0",
-    "ag-grid-community": "~23.0.0",
-    "ag-grid-angular": "~23.0.0",
+    "ag-grid-enterprise": "~23.1.0",
+    "ag-grid-community": "~23.1.0",
+    "ag-grid-angular": "~23.1.0",
     "@angular/animations": "8.2.14",
     "@angular/common": "8.2.14",
     "@angular/compiler": "8.2.14",
