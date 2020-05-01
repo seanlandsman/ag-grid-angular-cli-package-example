@@ -1,20 +1,20 @@
-import {Component, ViewEncapsulation} from "@angular/core";
-import {ColumnApi, GridApi} from "ag-grid-community";
+import { Component, ViewEncapsulation } from '@angular/core';
+import { ColumnApi, GridApi } from 'ag-grid-community';
 
-import {ProficiencyFilter} from '../filters/proficiency.component.filter';
-import {SkillFilter} from '../filters/skill.component.filter';
+import { ProficiencyFilter } from '../filters/proficiency.component.filter';
+import { SkillFilter } from '../filters/skill.component.filter';
 import RefData from '../data/refData';
 
-import "ag-grid-enterprise";
+import 'ag-grid-enterprise';
 
 // set your key here
 // import {LicenseManager} from "ag-grid-enterprise";
 // LicenseManager.setLicenseKey(<your key>);
 
-import {HeaderGroupComponent} from "../header-group-component/header-group.component";
-import {DateComponent} from "../date-component/date.component";
-import {SortableHeaderComponent} from "../header-component/sortable-header.component";
-import {RendererComponent} from "../renderer-component/renderer.component";
+import { HeaderGroupComponent } from '../header-group-component/header-group.component';
+import { DateComponent } from '../date-component/date.component';
+import { SortableHeaderComponent } from '../header-component/sortable-header.component';
+import { RendererComponent } from '../renderer-component/renderer.component';
 
 @Component({
     selector: 'rich-grid',
@@ -39,6 +39,7 @@ export class RichGridComponent {
             resizable: true,
             sortable: true,
             filter: true,
+            floatingFilter: true,
             headerComponent: 'sortableHeaderComponent',
             headerComponentParams: {
                 menuIcon: 'fa-bars'
@@ -88,7 +89,7 @@ export class RichGridComponent {
         this.columnDefs = [
             {
                 headerName: '#',
-                width: 30,
+                width: 40,
                 checkboxSelection: true,
                 filter: false,
                 sortable: false,
@@ -100,14 +101,14 @@ export class RichGridComponent {
                 headerGroupComponent: 'headerGroupComponent',
                 children: [
                     {
-                        field: "name",
+                        field: 'name',
                         width: 150,
                         pinned: true,
                         enableRowGroup: true,
                         enablePivot: true
                     },
                     {
-                        field: "country",
+                        field: 'country',
                         width: 150,
                         cellRenderer: countryCellRenderer,
                         pinned: true,
@@ -120,8 +121,8 @@ export class RichGridComponent {
                         columnGroupShow: 'show'
                     },
                     {
-                        headerName: "DOB",
-                        field: "dob",
+                        headerName: 'DOB',
+                        field: 'dob',
                         width: 195,
                         pinned: true,
                         cellRenderer: (params) => {
@@ -139,7 +140,7 @@ export class RichGridComponent {
                 headerName: 'IT Skills',
                 children: [
                     {
-                        field: "skills",
+                        field: 'skills',
                         width: 125,
                         sortable: false,
                         cellRenderer: skillsCellRenderer,
@@ -149,7 +150,7 @@ export class RichGridComponent {
                         enablePivot: true
                     },
                     {
-                        field: "proficiency",
+                        field: 'proficiency',
                         width: 160,
                         cellRenderer: percentCellRenderer,
                         menuTabs: ['filterMenuTab'],
@@ -161,13 +162,13 @@ export class RichGridComponent {
                 headerName: 'Contact',
                 children: [
                     {
-                        field: "mobile",
+                        field: 'mobile',
                         cellRendererFramework: RendererComponent,
                         width: 150,
                         filter: 'agTextColumnFilter'
                     },
                     {
-                        field: "address",
+                        field: 'address',
                         width: 500,
                         filter: 'agTextColumnFilter'
                     }
@@ -216,26 +217,28 @@ export class RichGridComponent {
     }
 
     public invokeSkillsFilterMethod() {
-        let skillsFilter = this.api.getFilterInstance('skills');
-        let componentInstance = skillsFilter.getFrameworkComponentInstance();
-        componentInstance.helloFromSkillsFilter();
+        this.api.getFilterInstance('skills', (instance) => {
+            let componentInstance = instance.getFrameworkComponentInstance();
+            componentInstance.helloFromSkillsFilter();
+        });
     }
 
     public dobFilter() {
-        let dateFilterComponent = this.api.getFilterInstance('dob');
-        dateFilterComponent.setModel({
-            type: 'equals',
-            dateFrom: '2000-01-01'
-        });
+        this.api.getFilterInstance('dob', (dateFilterComponent) => {
+            dateFilterComponent.setModel({
+                type: 'equals',
+                dateFrom: '2000-01-01'
+            });
 
-        this.api.onFilterChanged();
-    };
+            this.api.onFilterChanged();
+        });
+    }
 }
 
 function skillsCellRenderer(params) {
     const data = params.data;
     const skills = [];
-    RefData.IT_SKILLS.forEach(function (skill) {
+    RefData.IT_SKILLS.forEach(function(skill) {
         if (data && data.skills && data.skills[skill]) {
             skills.push(`<img src="images/skills/${skill}.png" width="16px" title="${skill}" />`);
         }
@@ -286,8 +289,8 @@ function percentCellRenderer(params) {
 
 //Utility function used to pad the date formatting.
 function pad(num, totalStringSize) {
-    let asString = num + "";
-    while (asString.length < totalStringSize) asString = "0" + asString;
+    let asString = num + '';
+    while (asString.length < totalStringSize) asString = '0' + asString;
     return asString;
 }
 
