@@ -20,9 +20,9 @@
   },
   "private": true,
   "dependencies": {
-    "ag-grid-enterprise": "~23.1.0",
-    "ag-grid-community": "~23.1.0",
-    "ag-grid-angular": "~23.1.0",
+    "ag-grid-enterprise": "~23.2.0",
+    "ag-grid-community": "~23.2.0",
+    "ag-grid-angular": "~23.2.0",
     "bootstrap": "4.5.0",
     "@angular/animations": "~9.1.9",
     "@angular/common": "~9.1.9",
