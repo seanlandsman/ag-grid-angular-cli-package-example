@@ -57,6 +57,10 @@ export class RichGridComponent {
         this.createColumnDefs();
     }
 
+    cd() {
+        console.log('run cd');
+    }
+
     public createRowData() {
         const rowData: any[] = [];
 
