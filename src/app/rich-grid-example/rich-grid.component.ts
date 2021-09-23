@@ -48,7 +48,7 @@ export class RichGridComponent {
 
         this.frameworkComponents = {
             sortableHeaderComponent: SortableHeaderComponent,
-            dateComponent: DateComponent,
+            agDateInput: DateComponent,
             headerGroupComponent: HeaderGroupComponent,
             rendererComponent: RendererComponent
         };
